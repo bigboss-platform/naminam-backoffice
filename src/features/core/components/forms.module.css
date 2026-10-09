@@ -1,0 +1,225 @@
+/* Shared form styles (workspace pattern: one shared CSS module for form primitives) */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Conversational question label (workspace rule — never a database-style noun) */
+.label {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--c-cacao);
+}
+
+.optional {
+  font-weight: 500;
+  color: var(--c-cocoa);
+}
+
+.input,
+.textarea,
+.display {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 var(--space-12);
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border);
+  background: #fff;
+  /* ≥16px stops iOS Safari from zooming on focus */
+  font: inherit;
+  font-size: 16px;
+  color: var(--c-text);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.textarea {
+  min-height: 96px;
+  padding: var(--space-12);
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.input:focus,
+.textarea:focus,
+.displayActive {
+  outline: none;
+  border-color: var(--c-fresa);
+  box-shadow: 0 0 0 3px rgba(226, 125, 140, 0.15);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--c-cocoa);
+  opacity: 0.7;
+}
+
+/* Custom display for keypad fields (money, time, digits) */
+.display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: left;
+  cursor: pointer;
+}
+
+.displayPrefix {
+  color: var(--c-cocoa);
+  font-weight: 600;
+}
+
+.displayValue {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.displayPlaceholder {
+  color: var(--c-cocoa);
+  opacity: 0.7;
+}
+
+/* Blinking underline cursor while the keypad is open (workspace rule) */
+.cursor {
+  width: 8px;
+  height: 20px;
+  border-bottom: 2px solid var(--c-fresa);
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Specific errors, one per broken rule (workspace rule) */
+.errors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  font-size: var(--font-size-sm);
+  color: var(--c-red-border);
+}
+
+.error::before {
+  content: '•';
+}
+
+.ruleOk {
+  color: #2e7d4f;
+}
+
+.ruleOk::before {
+  content: '✓';
+}
+
+/* Row of choice pills */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.pill {
+  min-height: 44px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--c-cocoa);
+  transition: background-color 200ms ease, color 200ms ease, transform 300ms var(--ease-spring);
+}
+
+.pill:active {
+  transform: scale(0.95);
+  transition: transform 100ms ease;
+}
+
+.pillActive {
+  background: var(--c-cacao);
+  border-color: var(--c-cacao);
+  color: var(--c-card);
+}
+
+/* Primary (full width) + secondary ghost button — secondary always below primary */
+.primaryButton,
+.secondaryButton {
+  width: 100%;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  transition: transform 300ms var(--ease-spring);
+}
+
+.primaryButton {
+  background: var(--c-cacao);
+  color: var(--c-card);
+  box-shadow: 0 4px 16px -4px rgba(61, 35, 20, 0.4);
+}
+
+.secondaryButton {
+  border: 1.5px solid var(--c-border);
+  background: transparent;
+  color: var(--c-cocoa);
+  font-weight: 600;
+}
+
+.primaryButton:active,
+.secondaryButton:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease;
+}
+
+.formError {
+  padding: var(--space-12) var(--space-md);
+  border-radius: var(--radius);
+  background: #fdecea;
+  color: var(--c-red-border);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+/* Smooth reveal for conditional fields (workspace grid-rows trick — never mount/unmount) */
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 280ms ease;
+}
+
+.revealVisible {
+  grid-template-rows: 1fr;
+}
+
+.revealInner {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.revealVisible > .revealInner {
+  opacity: 1;
+  pointer-events: auto;
+}

@@ -1,0 +1,82 @@
+/* Above bottom sheets (z 60) — the keypad is opened from inside forms */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(37, 20, 10, 0.2);
+}
+
+.panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--c-card);
+  box-shadow: 0 -8px 32px -8px rgba(61, 35, 20, 0.25);
+  transform: translateY(100%);
+  transition: transform 250ms ease;
+}
+
+.panelOpen {
+  transform: translateY(0);
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-20);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  color: var(--c-cocoa);
+}
+
+.value {
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-cacao);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.key,
+.keyDone {
+  min-height: 56px;
+  border-top: 1px solid var(--c-border);
+  border-left: 1px solid var(--c-border);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.key:nth-child(3n + 1),
+.keyDone:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.key:active {
+  background: var(--c-chip);
+}
+
+.keyDone {
+  background: var(--c-cacao);
+  color: var(--c-card);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+}
+
+@media (min-width: 600px) {
+  .panel {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}

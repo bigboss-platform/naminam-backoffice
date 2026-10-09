@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.hero {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    gap: var(--space-lg);
+  }
+}

@@ -1,0 +1,29 @@
+.header {
+  padding: var(--space-lg) 0 var(--space-md);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--c-cacao);
+}
+
+.subtitle {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-md);
+  color: var(--c-cocoa);
+}
+
+@media (min-width: 900px) {
+  .header {
+    padding-top: var(--space-2xl);
+  }
+}

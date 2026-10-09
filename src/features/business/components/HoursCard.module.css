@@ -1,0 +1,93 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-md);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  box-shadow: var(--shadow-1);
+  animation: fadeInUp 280ms ease both;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-height: 44px;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  background: var(--c-fresa-soft);
+  color: var(--c-fresa-deep);
+}
+
+.title {
+  flex: 1;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--c-cacao);
+}
+
+/* Standalone-row circle add (workspace canonical: 36px, 20px icon) */
+.addButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--c-cacao);
+  color: var(--c-cacao);
+}
+
+.addButton :global(.material-symbols-outlined) {
+  font-size: 20px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.row {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0 var(--space-sm) 0 var(--space-md);
+  border-radius: var(--radius);
+  background: var(--c-bg);
+  text-align: left;
+  color: var(--c-cocoa);
+}
+
+.row:active {
+  background: var(--c-chip);
+}
+
+.day {
+  flex: 1;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.time {
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  font-size: var(--font-size-sm);
+  color: var(--c-cocoa);
+}

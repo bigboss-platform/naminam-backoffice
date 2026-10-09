@@ -1,0 +1,31 @@
+.section {
+  padding-top: var(--space-lg);
+}
+
+.title {
+  margin-bottom: var(--space-12);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--c-cacao);
+  animation: fadeInUp 260ms ease both;
+}
+
+.list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.empty {
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  background: var(--c-chip);
+  font-size: var(--font-size-sm);
+  color: var(--c-cocoa);
+}
+
+@media (min-width: 900px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
+  }
+}

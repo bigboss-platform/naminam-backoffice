@@ -1,0 +1,7 @@
+/* Same 4:3 framing as the home hero on phones */
+.heroPreview {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-1);
+}

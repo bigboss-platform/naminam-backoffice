@@ -1,0 +1,26 @@
+.message {
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-md);
+  color: var(--c-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.dangerButton {
+  width: 100%;
+  min-height: 52px;
+  border-radius: var(--radius-lg);
+  background: var(--c-red-border);
+  color: #fff;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+}
+
+.dangerButton:disabled {
+  opacity: 0.7;
+}

@@ -1,0 +1,13 @@
+.main {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  /* clear the fixed bottom tab bar on mobile */
+  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + var(--space-2xl));
+}
+
+@media (min-width: 900px) {
+  .main {
+    padding-bottom: var(--space-3xl);
+  }
+}

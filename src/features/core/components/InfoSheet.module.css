@@ -1,0 +1,62 @@
+.infoButton {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--c-cocoa);
+}
+
+.infoButton :global(.material-symbols-outlined) {
+  font-size: 22px;
+}
+
+/* Underline tabs (workspace tab-bar pattern — never filled pills) */
+.tabs {
+  display: flex;
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--c-border);
+}
+
+.tab,
+.tabActive {
+  flex: 1;
+  min-height: 44px;
+  margin-bottom: -2px;
+  border-bottom: 2px solid transparent;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--c-cocoa);
+}
+
+.tabActive {
+  border-bottom-color: var(--c-cacao);
+  font-weight: 700;
+  color: var(--c-cacao);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding-left: var(--space-20);
+  font-size: var(--font-size-md);
+  color: var(--c-text-muted);
+}
+
+.glossary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.entry dt {
+  font-weight: 700;
+  color: var(--c-cacao);
+}
+
+.entry dd {
+  font-size: var(--font-size-sm);
+  color: var(--c-text-muted);
+}

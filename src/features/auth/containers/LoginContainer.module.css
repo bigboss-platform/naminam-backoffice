@@ -1,0 +1,58 @@
+/* Full-screen auth page handles its own safe area (workspace rule) */
+.page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(env(safe-area-inset-top) + var(--space-2xl)) var(--gutter) calc(env(safe-area-inset-bottom) + var(--space-xl));
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.badge {
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--c-chip);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-cocoa);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-border);
+  transition: background-color 200ms ease;
+}
+
+.dotActive {
+  background: var(--c-cacao);
+}
+
+@media (min-width: 600px) {
+  .page {
+    align-items: center;
+  }
+}

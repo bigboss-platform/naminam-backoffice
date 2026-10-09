@@ -1,0 +1,83 @@
+.question {
+  display: block;
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--c-cacao);
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 var(--space-xs) 0 var(--space-md);
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border);
+  background: #fff;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.inputRow:focus-within {
+  border-color: var(--c-fresa);
+  box-shadow: 0 0 0 3px rgba(226, 125, 140, 0.15);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 54px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  color: var(--c-text);
+}
+
+.eyeToggle {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-cocoa);
+}
+
+.primary {
+  margin-top: var(--space-lg);
+}
+
+.secondary {
+  margin-top: var(--space-sm);
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Horizontal slide between steps (workspace rule: wizard steps slide, never fade) */
+.slideForward {
+  animation: slideInFromRight 240ms ease both;
+}
+
+.slideBackward {
+  animation: slideInFromLeft 240ms ease both;
+}

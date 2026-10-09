@@ -1,0 +1,59 @@
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  box-shadow: var(--shadow-1);
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--c-fresa-soft);
+  color: var(--c-fresa-deep);
+}
+
+.name {
+  display: block;
+  font-weight: 700;
+  color: var(--c-cacao);
+}
+
+.email {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--c-cocoa);
+}
+
+.success {
+  margin-top: var(--space-md);
+  padding: var(--space-12) var(--space-md);
+  border-radius: var(--radius);
+  background: #e7f5ec;
+  color: #2e7d4f;
+  font-weight: 600;
+}
+
+.actions {
+  margin-top: var(--space-md);
+  padding: 0 var(--gutter);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .profile,
+  .actions,
+  .success {
+    max-width: 560px;
+  }
+}
