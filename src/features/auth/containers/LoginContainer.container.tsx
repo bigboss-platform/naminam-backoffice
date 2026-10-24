@@ -5,7 +5,12 @@ import { LoginStepInput } from '../components/LoginStepInput.component';
 import { useLoginWizard } from '../hooks/useLoginWizard.hook';
 import styles from './LoginContainer.module.css';
 
-export function LoginContainer() {
+type LoginContainerProps = {
+  /** DEMO MODE only: the demo account, shown so the client can try the panel. */
+  demoLogin: { email: string; password: string } | null;
+};
+
+export function LoginContainer({ demoLogin }: LoginContainerProps) {
   const ctx = useLoginWizard();
   return (
     <main className={`${styles.page} page-fade-in`}>
@@ -20,6 +25,14 @@ export function LoginContainer() {
           <span className={`${styles.dot} ${ctx.step === 'password' ? styles.dotActive : ''}`} />
         </div>
         <LoginStepInput ctx={ctx} />
+        {demoLogin && (
+          <p className={styles.demo}>
+            <strong>Modo demostración</strong>
+            Correo: {demoLogin.email}
+            <br />
+            Contraseña: {demoLogin.password}
+          </p>
+        )}
       </div>
     </main>
   );

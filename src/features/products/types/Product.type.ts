@@ -7,7 +7,7 @@ export type Product = {
   name: string;
   /** Category slug (e.g. "cheesecake"). */
   categoryId: string;
-  /** USD, e.g. 6.5 */
+  /** Soles (PEN), e.g. 25 */
   price: number;
   description: string;
   /** Short tasting note under the name ("Chocolate intenso"). */

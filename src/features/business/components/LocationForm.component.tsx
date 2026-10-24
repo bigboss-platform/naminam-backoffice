@@ -30,7 +30,7 @@ export function LocationForm({ settings, onSaved }: { settings: BusinessSettings
       <FormField label="¿En qué ciudad?" htmlFor="location-city" error={errorFor('city')}>
         <input id="location-city" className={forms.input} value={input.city} placeholder="Ej. Lima" onChange={(event) => update('city', event.target.value)} onBlur={() => touch('city')} />
       </FormField>
-      <FormField label="Pega el enlace de Google Maps del local" htmlFor="location-maps" isOptional error={errorFor('mapsUrl')}>
+      <FormField label="¿Cuál es el enlace de Google Maps del local?" htmlFor="location-maps" isOptional error={errorFor('mapsUrl')}>
         <input id="location-maps" className={forms.input} type="url" inputMode="url" autoCapitalize="none" value={input.mapsUrl} placeholder="https://www.google.com/maps/place/…" onChange={(event) => update('mapsUrl', event.target.value)} onBlur={() => touch('mapsUrl')} />
       </FormField>
       {coordinates && <MapPreview coordinates={coordinates} title={input.address} />}

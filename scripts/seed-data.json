@@ -44,7 +44,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/tequenos.webp",
       "posterUrl": "",
       "sortOrder": 1
     },
@@ -60,7 +60,7 @@
       "isAddOn": true,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/salsas.webp",
       "posterUrl": "",
       "sortOrder": 2
     },
@@ -76,7 +76,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/mini-empanadas.webp",
       "posterUrl": "",
       "sortOrder": 3
     },
@@ -92,7 +92,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/dulce-de-higo.webp",
       "posterUrl": "",
       "sortOrder": 4
     },
@@ -108,7 +108,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/golfeados.webp",
       "posterUrl": "",
       "sortOrder": 5
     },
@@ -124,7 +124,7 @@
       "isAddOn": false,
       "isAvailable": false,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/besitos-de-coco.webp",
       "posterUrl": "",
       "sortOrder": 6
     },
@@ -140,7 +140,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/quesillo.webp",
       "posterUrl": "",
       "sortOrder": 7
     },
@@ -156,7 +156,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/tortas.webp",
       "posterUrl": "",
       "sortOrder": 8
     },
@@ -172,7 +172,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/bienmesabe.webp",
       "posterUrl": "",
       "sortOrder": 9
     },
@@ -188,7 +188,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/papelon-con-limon.webp",
       "posterUrl": "",
       "sortOrder": 10
     },
@@ -204,7 +204,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/chicha-venezolana.webp",
       "posterUrl": "",
       "sortOrder": 11
     },
@@ -220,7 +220,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/ponche-crema.webp",
       "posterUrl": "",
       "sortOrder": 12
     },
@@ -236,7 +236,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/tequenos-pan-de-jamon.webp",
       "posterUrl": "",
       "sortOrder": 13
     },
@@ -252,7 +252,7 @@
       "isAddOn": false,
       "isAvailable": true,
       "mediaType": "image",
-      "mediaUrl": "",
+      "mediaUrl": "/brand/products/quesillo-chicha-morada.webp",
       "posterUrl": "",
       "sortOrder": 14
     }
@@ -282,6 +282,6 @@
         "closesAt": "20:00"
       }
     ],
-    "heroImageUrl": ""
+    "heroImageUrl": "/brand/mascota.webp"
   }
 }

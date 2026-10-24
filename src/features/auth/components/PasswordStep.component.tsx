@@ -34,7 +34,7 @@ export function PasswordStep({ ctx }: { ctx: LoginWizardCtx }) {
   return (
     <>
       <label className={`${styles.question} font-display`} htmlFor="login-password">
-        Escribe tu contraseña
+        ¿Cuál es tu contraseña?
       </label>
       <PasswordField
         value={password}

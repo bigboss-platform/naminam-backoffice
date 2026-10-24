@@ -1,6 +1,7 @@
 import 'server-only';
 import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
+import { getSessionSecret } from './sessionSecret';
 
 /**
  * Stateless session: a signed (HS256) JWT in an httpOnly cookie. Pattern from the
@@ -12,8 +13,8 @@ const SESSION_DAYS = 7;
 export type SessionPayload = { adminId: string; email: string; name: string };
 
 function getSecretKey(): Uint8Array {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret || secret.length < 32) throw new Error('SESSION_SECRET falta o es muy corto (revisa .env.local)');
+  const secret = getSessionSecret();
+  if (!secret) throw new Error('SESSION_SECRET falta o es muy corto (revisa .env.local)');
   return new TextEncoder().encode(secret);
 }
 

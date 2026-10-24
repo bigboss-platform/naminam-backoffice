@@ -1,5 +1,6 @@
 import { jwtVerify } from 'jose';
 import { NextResponse, type NextRequest } from 'next/server';
+import { getSessionSecret } from './server/auth/sessionSecret';
 
 /**
  * Optimistic auth redirect (Next.js 16 "proxy", formerly middleware). Only reads the
@@ -11,7 +12,7 @@ const PUBLIC_PATHS = ['/login'];
 
 async function hasValidSession(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  const secret = process.env.SESSION_SECRET;
+  const secret = getSessionSecret();
   if (!token || !secret) return false;
   try {
     await jwtVerify(token, new TextEncoder().encode(secret), { algorithms: ['HS256'] });

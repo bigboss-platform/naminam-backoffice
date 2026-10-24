@@ -32,7 +32,7 @@ export function BrandForm({ settings, onSaved }: { settings: BusinessSettings; o
       <FormField label="¿Qué frase lo acompaña?" htmlFor="brand-tagline" isOptional>
         <input id="brand-tagline" className={forms.input} value={input.tagline} placeholder="Ej. Dulcería · Pastelería" onChange={(event) => update('tagline', event.target.value)} />
       </FormField>
-      <FormField label="Pega el enlace de la foto de portada del inicio" htmlFor="brand-hero" isOptional error={errorFor('heroImageUrl')}>
+      <FormField label="¿Cuál es el enlace de la foto de portada del inicio?" htmlFor="brand-hero" isOptional error={errorFor('heroImageUrl')}>
         <input id="brand-hero" className={forms.input} type="url" inputMode="url" autoCapitalize="none" value={input.heroImageUrl} placeholder="https://…" onChange={(event) => update('heroImageUrl', event.target.value)} onBlur={() => touch('heroImageUrl')} />
       </FormField>
       {canPreview && (

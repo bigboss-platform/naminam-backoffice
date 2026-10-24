@@ -56,3 +56,21 @@
     align-items: center;
   }
 }
+
+/* DEMO MODE hint (no database): the demo account for the client presentation */
+.demo {
+  margin-top: var(--space-xl);
+  padding: var(--space-12) var(--space-md);
+  border: 2px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-chip);
+  color: var(--c-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.demo strong {
+  display: block;
+  color: var(--c-cacao);
+}

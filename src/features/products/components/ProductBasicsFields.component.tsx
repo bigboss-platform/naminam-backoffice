@@ -40,7 +40,7 @@ export function ProductBasicsFields({ ctx, categories }: { ctx: ProductFormCtx; 
         />
       </FormField>
 
-      <FormField label="¿Cuánto cuesta la porción?" htmlFor="product-price" error={errorFor('price')}>
+      <FormField label="¿Cuánto cuesta?" htmlFor="product-price" error={errorFor('price')}>
         <KeypadField
           id="product-price"
           digits={priceDigits}
@@ -49,7 +49,7 @@ export function ProductBasicsFields({ ctx, categories }: { ctx: ProductFormCtx; 
           stripLeadingZeros
           formatDisplay={(digits) => formatMoneyInput(centsDigitsToAmount(digits))}
           keyboardLabel="Precio (los últimos 2 dígitos son los céntimos)"
-          prefix="$"
+          prefix="S/"
           placeholder="0,00"
           onDone={() => touch('price')}
         />
