@@ -7,7 +7,7 @@ type PageHeaderProps = {
   subtitle: string;
   /** ⓘ info sheet trigger (every view has one — workspace rule). */
   info: ReactNode;
-  /** Main action (e.g. "Nuevo postre"). Mobile: full width under the title. Desktop: right of the title row. */
+  /** Main action (e.g. "Nuevo producto"). Mobile: full width under the title. Desktop: right of the title row. */
   action?: ReactNode;
 };
 

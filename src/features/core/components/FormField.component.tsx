@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import styles from './forms.module.css';
 
 type FormFieldProps = {
-  /** Conversational question, e.g. "¿Cómo se llama el postre?" */
+  /** Conversational question, e.g. "¿Cómo se llama el producto?" */
   label: string;
   htmlFor?: string;
   isOptional?: boolean;

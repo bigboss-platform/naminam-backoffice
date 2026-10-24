@@ -26,8 +26,8 @@ export function ProductPreview({ input }: { input: ProductInput }) {
           {input.badge.trim() && <span className={styles.badge}>{input.badge.trim()}</span>}
         </div>
         <div className={styles.body}>
-          <h3 className={`${styles.name} font-display`}>{input.name.trim() || 'Nombre del postre'}</h3>
-          <p className={styles.description}>{input.description.trim() || 'Descripción del postre'}</p>
+          <h3 className={`${styles.name} font-display`}>{input.name.trim() || 'Nombre del producto'}</h3>
+          <p className={styles.description}>{input.description.trim() || 'Descripción del producto'}</p>
           <div className={styles.footer}>
             <span className={styles.note}>{input.isAddOn ? 'Complemento' : input.note.trim()}</span>
             <span className={styles.priceGroup}>

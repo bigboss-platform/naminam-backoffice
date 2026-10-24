@@ -1,34 +1,36 @@
 /*
- * Ñami Ñam design tokens — source: naminam/stitch_ami_am_bakery_experience/
- * ami_am_dulcer_a_pasteler_a/DESIGN.md (mockup design system), adapted to the
- * workspace 4px spacing grid (../../UI-UX-RULES.md).
- * Dark mode is intentionally suppressed (DESIGN.md: "sunlit pastelería counter").
+ * Los Antojitos de Santanita — same tokens as the public site (naminam-menu/src/app/globals.css):
+ * Manjar #F7B52C · Guayaba #D92F52 · Turquesa #5BBFB5 · Arena #F6D295 · Cacao #3B1F14.
+ * Legacy token names (--c-fresa…) are kept so every component keeps working.
  */
 :root {
-  /* Brand */
-  --c-cacao: #3d2314;          /* primary — headlines, primary buttons, active states */
-  --c-cacao-deep: #250f03;     /* pressed / darkest text */
-  --c-fresa: #e27d8c;          /* accent — favorites, badges, delight moments */
-  --c-fresa-deep: #984251;     /* accent text on light surfaces (AA contrast) */
-  --c-fresa-soft: rgba(226, 125, 140, 0.12);
-  --c-cocoa: #785848;          /* secondary text, notes, unselected states */
+  --c-manjar: #f7b52c;
+  --c-guayaba: #d92f52;
+  --c-turquesa: #5bbfb5;
+  --c-arena: #f6d295;
+
+  --c-cacao: #3b1f14;          /* primary — headlines, primary buttons, active states */
+  --c-cacao-deep: #24120b;     /* pressed / darkest text */
+  --c-fresa: #d92f52;          /* accent (= Guayaba) */
+  --c-fresa-deep: #b01f40;     /* accent text on light surfaces */
+  --c-fresa-soft: rgba(217, 47, 82, 0.1);
+  --c-cocoa: #6e4a38;          /* secondary text, notes, unselected states */
 
   /* Surfaces */
-  --c-bg: #fdf6f0;             /* peach cream base */
-  --c-bg-alt: #f9efe8;         /* alternate band (about, footer) */
-  --c-card: #fffdf9;           /* cream sheet — cards, bars */
-  --c-chip: #f3ede7;           /* muted fills (secondary buttons, fact rows) */
-  --c-border: #f0ddd3;         /* sugar-crust hairline */
+  --c-bg: #fff6e4;
+  --c-bg-alt: #fbe7c2;
+  --c-card: #ffffff;
+  --c-chip: #fcefd6;
+  --c-border: #f1d9ab;
 
-  --c-text: #1e1b18;
-  --c-text-muted: #50443f;
+  --c-text: #3b1f14;
+  --c-text-muted: #5e4232;
   --c-whatsapp: #25d366;
-  --c-red-border: #ba1a1a;
+  --c-red-border: #b01f40;
 
-  /* Elevation — always cacao-tinted, never pure black */
-  --shadow-1: 0 4px 20px -2px rgba(61, 35, 20, 0.06);
-  --shadow-2: 0 8px 32px -4px rgba(61, 35, 20, 0.12);
-  --image-inset: inset 0 0 0 1px rgba(61, 35, 20, 0.06);
+  --shadow-1: 0 4px 20px -2px rgba(59, 31, 20, 0.08);
+  --shadow-2: 0 8px 32px -4px rgba(59, 31, 20, 0.16);
+  --image-inset: inset 0 0 0 1px rgba(59, 31, 20, 0.06);
 
   /* Spacing — 4px grid */
   --space-xs: 4px;
@@ -128,7 +130,7 @@ img {
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), 'Comic Sans MS', cursive;
 }
 
 /* Page fade-in on mount — workspace UI-UX-RULES.md "Animations" */

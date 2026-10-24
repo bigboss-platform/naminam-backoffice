@@ -23,13 +23,13 @@ export function ProductsContainer({ products, categories }: { products: Product[
     <div className="page-fade-in">
       <PageHeader
         title="Productos"
-        subtitle={products.length === 1 ? '1 postre en el menú' : `${products.length} postres en el menú`}
+        subtitle={products.length === 1 ? '1 producto en el menú' : `${products.length} productos en el menú`}
         info={<InfoSheet {...PRODUCTS_INFO} />}
         action={
           ctx.hasCategories && (
             <button type="button" className={`${forms.primaryButton} ${styles.newButton}`} onClick={ctx.openNewProduct}>
               <span className="material-symbols-outlined">add</span>
-              Nuevo postre
+              Nuevo producto
             </button>
           )
         }
@@ -42,7 +42,7 @@ export function ProductsContainer({ products, categories }: { products: Product[
           ))}
         </>
       ) : (
-        <EmptyState icon="category" title="Aún no hay categorías" text="Crea una categoría para empezar a agregar postres." actionLabel="Crear categoría" onAction={() => router.push('/categorias')} />
+        <EmptyState icon="category" title="Aún no hay categorías" text="Crea una categoría para empezar a agregar productos." actionLabel="Crear categoría" onAction={() => router.push('/categorias')} />
       )}
 
       <ProductActionsSheet ctx={ctx} />
@@ -51,7 +51,7 @@ export function ProductsContainer({ products, categories }: { products: Product[
         open={ctx.isDeleteOpen}
         title={`¿Eliminar "${ctx.selected?.name ?? ''}"?`}
         message="Desaparece del menú y no se puede deshacer. Si solo se agotó, mejor usa «Ocultar del menú»."
-        confirmLabel="Eliminar postre"
+        confirmLabel="Eliminar producto"
         isWorking={ctx.isWorking}
         error={ctx.actionError}
         onConfirm={() => void ctx.confirmDelete()}

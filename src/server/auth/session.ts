@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
  * Stateless session: a signed (HS256) JWT in an httpOnly cookie. Pattern from the
  * Next.js authentication guide (node_modules/next/dist/docs/01-app/02-guides/authentication.md).
  */
-export const SESSION_COOKIE = 'naminam_session';
+export const SESSION_COOKIE = 'santanita_session';
 const SESSION_DAYS = 7;
 
 export type SessionPayload = { adminId: string; email: string; name: string };

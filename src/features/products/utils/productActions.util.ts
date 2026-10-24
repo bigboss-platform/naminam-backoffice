@@ -16,7 +16,7 @@ export function getProductActions(ctx: ProductsPageCtx): SheetActionItem[] {
     {
       id: 'featured',
       icon: 'star',
-      label: selected.isFeatured ? 'Quitar de "Nuestros favoritos"' : 'Agregar a "Nuestros favoritos"',
+      label: selected.isFeatured ? 'Quitar de "Los consentidos de la casa"' : 'Agregar a "Los consentidos de la casa"',
       onSelect: () => void toggleFlag('isFeatured'),
     },
     { id: 'delete', icon: 'delete', label: 'Eliminar', onSelect: askDeleteSelected, isDanger: true },

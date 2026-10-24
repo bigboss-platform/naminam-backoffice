@@ -5,7 +5,7 @@ export const BUSINESS_INFO: { title: string; howItWorks: string[]; glossary: Glo
   title: 'Negocio',
   howItWorks: [
     'Toca una tarjeta para editarla. Los cambios se guardan al tocar «Guardar».',
-    'Los números se escriben con el código del país, sin el "+": 58 para Venezuela (ej. 584126722218).',
+    'Los números se escriben con el código del país, sin el "+": 51 para Perú (ej. 51987654321).',
     'Para la ubicación, abre el local en Google Maps, copia el enlace de la barra de direcciones y pégalo: el mapa se lee de ese enlace.',
     'Los horarios se escriben en formato 24 horas: 1930 son las 7:30 p. m.',
     'La portada es la foto grande del inicio de la web. Pega el enlace directo de la foto.',

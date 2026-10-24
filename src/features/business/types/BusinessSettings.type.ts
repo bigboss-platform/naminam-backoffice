@@ -37,8 +37,8 @@ export type BrandInput = Pick<BusinessSettings, 'name' | 'tagline' | 'heroImageU
 export const EMPTY_HOURS_ROW: HoursRowInput = { label: '', opensAt: '', closesAt: '' };
 
 export const EMPTY_BUSINESS_SETTINGS: BusinessSettings = {
-  name: 'Ñami Ñam',
-  tagline: 'Dulcería · Pastelería',
+  name: 'Los Antojitos de Santanita',
+  tagline: 'Antojitos venezolanos con giros peruanos',
   whatsappNumber: '',
   phoneNumber: '',
   instagramHandle: '',

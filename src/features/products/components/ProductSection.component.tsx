@@ -13,10 +13,10 @@ export function ProductSection({ section, ctx }: ProductSectionProps) {
     <section className={styles.section} aria-labelledby={`category-${category.id}`}>
       <h2 id={`category-${category.id}`} className={`${styles.title} font-display`}>
         {category.label}
-        <span className={styles.count} aria-label={`${products.length} postres`}>{products.length}</span>
+        <span className={styles.count} aria-label={`${products.length} productos`}>{products.length}</span>
       </h2>
       {products.length === 0 ? (
-        <p className={styles.empty}>Sin postres en esta categoría.</p>
+        <p className={styles.empty}>Sin productos en esta categoría.</p>
       ) : (
         <div className={styles.list}>
           {products.map((product, index) => (

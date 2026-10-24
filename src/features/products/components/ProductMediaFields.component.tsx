@@ -21,7 +21,7 @@ export function ProductMediaFields({ ctx }: { ctx: ProductFormCtx }) {
 
   return (
     <>
-      <FormField label="¿El postre se muestra con foto o con video?">
+      <FormField label="¿El producto se muestra con foto o con video?">
         <PillChoice
           ariaLabel="Tipo de archivo"
           options={MEDIA_OPTIONS}

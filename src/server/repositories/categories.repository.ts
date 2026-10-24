@@ -31,7 +31,7 @@ export async function findCategoryById(categoryId: string): Promise<Category | n
   return document ? toCategory(document) : null;
 }
 
-/** Slug comes from the label and is unique ("postre", "postre-2", …). It never changes afterwards. */
+/** Slug comes from the label and is unique ("postres", "postres-2", …). It never changes afterwards. */
 async function buildUniqueSlug(label: string): Promise<string> {
   const base = slugify(label) || 'categoria';
   const categories = await collection();

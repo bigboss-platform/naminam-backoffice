@@ -1,6 +1,6 @@
 /**
- * Seeds the local MongoDB: indexes, the first admin, and the current Ñami Ñam menu +
- * business info (scripts/seed-data.json — generated from the landing site's data files).
+ * Seeds the local MongoDB: indexes, the first admin, and the Santanita menu + business info
+ * (scripts/seed-data.json — generated from naminam-menu/src/features/menu/data/menu.data.ts).
  *
  *   npm run seed            → creates what's missing (safe to run again; never overwrites edits)
  *   npm run seed -- --reset → wipes products, categories and settings, then seeds them again

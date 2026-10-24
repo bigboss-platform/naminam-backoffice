@@ -26,7 +26,7 @@ export async function countProductsInCategory(categorySlug: string): Promise<num
 
 /** Slug from the name, unique; kept stable on rename so public links (/menu#slug) don't break. */
 async function buildUniqueSlug(name: string): Promise<string> {
-  const base = slugify(name) || 'postre';
+  const base = slugify(name) || 'producto';
   const products = await collection();
   let slug = base;
   for (let suffix = 2; await products.findOne({ slug }); suffix += 1) slug = `${base}-${suffix}`;

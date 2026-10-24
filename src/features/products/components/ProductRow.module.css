@@ -112,6 +112,6 @@
 @media (hover: hover) and (pointer: fine) {
   .row:hover {
     transform: scale(1.02);
-    box-shadow: 0 12px 28px -12px rgba(61, 35, 20, 0.3);
+    box-shadow: 0 12px 28px -12px rgba(59, 31, 20, 0.3);
   }
 }

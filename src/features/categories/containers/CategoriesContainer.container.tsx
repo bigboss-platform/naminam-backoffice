@@ -39,7 +39,7 @@ export function CategoriesContainer({ categories, productCountBySlug }: Categori
       />
 
       {categories.length === 0 ? (
-        <EmptyState icon="category" title="Aún no hay categorías" text="Crea una para empezar a agregar postres." actionLabel="Crear categoría" onAction={ctx.openNewCategory} />
+        <EmptyState icon="category" title="Aún no hay categorías" text="Crea una para empezar a agregar productos." actionLabel="Crear categoría" onAction={ctx.openNewCategory} />
       ) : (
         <div className={styles.list}>
           {categories.map((category, index) => (
@@ -56,7 +56,7 @@ export function CategoriesContainer({ categories, productCountBySlug }: Categori
       <ConfirmSheet
         open={ctx.isDeleteOpen}
         title={`¿Eliminar "${selected?.label ?? ''}"?`}
-        message="Solo se puede eliminar si no tiene postres. Esta acción no se puede deshacer."
+        message="Solo se puede eliminar si no tiene productos. Esta acción no se puede deshacer."
         confirmLabel="Eliminar categoría"
         isWorking={ctx.isWorking}
         error={error}

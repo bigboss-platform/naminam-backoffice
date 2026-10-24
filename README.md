@@ -1,4 +1,11 @@
-# Ñami Ñam — Back office
+# Back office — Los Antojitos de Santanita
+
+> **Rama `santanita` — Los Antojitos de Santanita (Lima).** Mismo panel con la marca de Santanita
+> (colores, Shantell Sans + Nunito, logo provisional, soles, teléfonos +51). MongoDB local propio:
+> contenedor `santanita-mongo` en el puerto **27018**, base `santanita`. El sitio público
+> (`naminam-menu`, rama `santanita`) **todavía no lee esta base**: usa datos estáticos (MVP).
+> Pendiente para conectarlos: variantes, estado de stock (en stock / por encargo / agotado) y
+> "temporada" en el modelo de productos.
 
 Admin panel for the Ñami Ñam public site: desserts, categories, contact, location, opening
 hours and cover photo. Next.js 16 + MongoDB (server-side only).

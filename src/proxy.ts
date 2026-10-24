@@ -6,7 +6,7 @@ import { NextResponse, type NextRequest } from 'next/server';
  * cookie — the real check happens in the Data Access Layer (src/server/auth/dal.ts) next
  * to every data read and Server Action.
  */
-const SESSION_COOKIE = 'naminam_session';
+const SESSION_COOKIE = 'santanita_session';
 const PUBLIC_PATHS = ['/login'];
 
 async function hasValidSession(request: NextRequest): Promise<boolean> {

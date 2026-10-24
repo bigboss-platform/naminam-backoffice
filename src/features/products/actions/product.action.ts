@@ -14,7 +14,7 @@ import {
 import type { ProductInput } from '../types/Product.type';
 import { getProductProblems, normalizeProductInput } from '../utils/product.validation';
 
-const SAVE_ERROR = 'No pudimos guardar el postre. Intenta nuevamente.';
+const SAVE_ERROR = 'No pudimos guardar el producto. Intenta nuevamente.';
 
 /** Server-side validation — never trust the form. Returns the first problem, or ''. */
 async function validate(input: ProductInput): Promise<string> {
@@ -32,7 +32,7 @@ export async function saveProduct(productId: string, rawInput: ProductInput): Pr
     if (productId === '') {
       await createProduct(input);
     } else if (!(await updateProduct(productId, input))) {
-      return actionFailure('Este postre ya no existe. Recarga la página.');
+      return actionFailure('Este producto ya no existe. Recarga la página.');
     }
     revalidatePath('/productos');
     revalidatePath('/categorias');
@@ -50,7 +50,7 @@ export async function toggleProductFlag(
 ): Promise<ActionResult> {
   if (!(await getActionSession())) return actionFailure(NOT_LOGGED_IN_ERROR);
   try {
-    if (!(await setProductFlag(productId, flag, value))) return actionFailure('Este postre ya no existe.');
+    if (!(await setProductFlag(productId, flag, value))) return actionFailure('Este producto ya no existe.');
     revalidatePath('/productos');
     revalidatePath('/categorias');
     await refreshPublicSite();
@@ -69,6 +69,6 @@ export async function removeProduct(productId: string): Promise<ActionResult> {
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {
-    return actionFailure('No pudimos eliminar el postre. Intenta nuevamente.');
+    return actionFailure('No pudimos eliminar el producto. Intenta nuevamente.');
   }
 }

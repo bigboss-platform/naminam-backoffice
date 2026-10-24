@@ -7,8 +7,8 @@ import { after, before, describe, it } from 'node:test';
 import { MongoClient } from 'mongodb';
 import { EMPTY_PRODUCT_INPUT } from '@/features/products/types/Product.type';
 
-const TEST_DB = 'naminam_test';
-process.env.MONGODB_URI ??= 'mongodb://naminam:naminam-dev@localhost:27017/?authSource=admin';
+const TEST_DB = 'santanita_test';
+process.env.MONGODB_URI ??= 'mongodb://santanita:santanita-dev@localhost:27018/?authSource=admin';
 process.env.MONGODB_DB = TEST_DB;
 
 const categories = await import('@/server/repositories/categories.repository');
@@ -66,12 +66,12 @@ describe('products repository', () => {
 
 describe('settings repository', () => {
   it('upserts partial sections and edits hours rows', async () => {
-    assert.equal((await settings.getBusinessSettings()).name, 'Ñami Ñam');
-    await settings.updateBusinessSettings({ whatsappNumber: '584126722218', city: 'Barquisimeto' });
+    assert.equal((await settings.getBusinessSettings()).name, 'Los Antojitos de Santanita');
+    await settings.updateBusinessSettings({ whatsappNumber: '51987654321', city: 'Lima' });
     await settings.addHoursRow({ label: 'Martes a viernes', opensAt: '10:00', closesAt: '20:00' });
 
     const saved = await settings.getBusinessSettings();
-    assert.equal(saved.whatsappNumber, '584126722218');
+    assert.equal(saved.whatsappNumber, '51987654321');
     assert.equal(saved.hours.length, 1);
 
     const rowId = saved.hours[0].id;

@@ -27,7 +27,7 @@ export function CategoryRow({ category, index, ctx }: { category: Category; inde
         <span className={styles.text}>
           <span className={`${styles.label} font-display`}>{category.label}</span>
           <span className={styles.meta}>
-            {count === 1 ? '1 postre' : `${count} postres`}
+            {count === 1 ? '1 producto' : `${count} productos`}
             {category.tagline ? ` · ${category.tagline}` : ''}
           </span>
         </span>

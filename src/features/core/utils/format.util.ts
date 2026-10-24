@@ -22,9 +22,9 @@ export function formatMoneyInput(amount: number): string {
   return `${whole.replace(/\B(?=(\d{3})+(?!\d))/g, '.')},${decimals}`;
 }
 
-/** Public-menu price style (same as the landing): $7, $6.50 */
+/** Public-menu price style (same as the site): S/ 25, S/ 6.50 */
 export function formatMenuPrice(amount: number): string {
-  return `$${Number.isInteger(amount) ? amount.toString() : amount.toFixed(2)}`;
+  return `S/ ${Number.isInteger(amount) ? amount.toString() : amount.toFixed(2)}`;
 }
 
 /** "1000" (keypad) → "10:00"; partial input shows what's typed so far. */
@@ -54,10 +54,10 @@ export function formatHour(time: string): string {
   return `${displayHour}:${minuteText} ${hour < 12 ? 'a. m.' : 'p. m.'}`;
 }
 
-/** "584126722218" → "+58 412 672 2218" (Venezuela-style grouping; other lengths fall back to spaced groups). */
+/** "51987654321" → "+51 987 654 321" (Peru mobile grouping; other lengths fall back to spaced groups). */
 export function formatPhone(digits: string): string {
   if (!digits) return '';
-  const match = /^(\d{2})(\d{3})(\d{3})(\d{4})$/.exec(digits);
+  const match = /^(\d{2})(\d{3})(\d{3})(\d{3})$/.exec(digits);
   if (match) return `+${match[1]} ${match[2]} ${match[3]} ${match[4]}`;
   return `+${digits.replace(/(\d{3})(?=\d)/g, '$1 ')}`;
 }

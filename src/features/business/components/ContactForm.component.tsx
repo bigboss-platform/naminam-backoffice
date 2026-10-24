@@ -24,13 +24,13 @@ export function ContactForm({ settings, onSaved }: { settings: BusinessSettings;
   return (
     <form className={forms.form} onSubmit={(event) => { event.preventDefault(); void form.save(); }}>
       <FormField label="¿A qué WhatsApp llegan los pedidos?" htmlFor="contact-whatsapp" error={errorFor('whatsappNumber')}>
-        <KeypadField id="contact-whatsapp" digits={input.whatsappNumber} onChange={(digits) => update('whatsappNumber', digits)} maxDigits={15} formatDisplay={formatPhone} keyboardLabel="WhatsApp con código de país (58…)" placeholder="58 412 000 0000" onDone={() => touch('whatsappNumber')} />
+        <KeypadField id="contact-whatsapp" digits={input.whatsappNumber} onChange={(digits) => update('whatsappNumber', digits)} maxDigits={15} formatDisplay={formatPhone} keyboardLabel="WhatsApp con código de país (51…)" placeholder="51 987 654 321" onDone={() => touch('whatsappNumber')} />
       </FormField>
       <FormField label="¿A qué número llaman los clientes?" htmlFor="contact-phone" isOptional error={errorFor('phoneNumber')}>
-        <KeypadField id="contact-phone" digits={input.phoneNumber} onChange={(digits) => update('phoneNumber', digits)} maxDigits={15} formatDisplay={formatPhone} keyboardLabel="Teléfono con código de país (58…)" placeholder="58 412 000 0000" onDone={() => touch('phoneNumber')} />
+        <KeypadField id="contact-phone" digits={input.phoneNumber} onChange={(digits) => update('phoneNumber', digits)} maxDigits={15} formatDisplay={formatPhone} keyboardLabel="Teléfono con código de país (51…)" placeholder="51 987 654 321" onDone={() => touch('phoneNumber')} />
       </FormField>
       <FormField label="¿Cuál es el usuario de Instagram?" htmlFor="contact-instagram" isOptional error={errorFor('instagramHandle')}>
-        <input id="contact-instagram" className={forms.input} autoCapitalize="none" value={input.instagramHandle} placeholder="nami_pasteleria" onChange={(event) => update('instagramHandle', event.target.value.replace(/^@/, ''))} onBlur={() => touch('instagramHandle')} />
+        <input id="contact-instagram" className={forms.input} autoCapitalize="none" value={input.instagramHandle} placeholder="antojitos.santanita" onChange={(event) => update('instagramHandle', event.target.value.replace(/^@/, ''))} onBlur={() => touch('instagramHandle')} />
       </FormField>
       <SaveButton isVisible={form.isComplete} isSaving={form.isSaving} error={form.saveError} />
     </form>

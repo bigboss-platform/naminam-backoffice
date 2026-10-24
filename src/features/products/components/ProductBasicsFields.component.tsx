@@ -16,7 +16,7 @@ export function ProductBasicsFields({ ctx, categories }: { ctx: ProductFormCtx; 
 
   return (
     <>
-      <FormField label="¿Cómo se llama el postre?" htmlFor="product-name" error={errorFor('name')}>
+      <FormField label="¿Cómo se llama el producto?" htmlFor="product-name" error={errorFor('name')}>
         <input
           id="product-name"
           className={forms.input}

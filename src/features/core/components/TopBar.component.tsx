@@ -17,7 +17,7 @@ export function TopBar({ name, email }: { name: string; email: string }) {
   return (
     <header className={styles.topBar}>
       <div className={styles.inner}>
-        <Link href="/productos" className={styles.brand} aria-label="Ñami Ñam — administración">
+        <Link href="/productos" className={styles.brand} aria-label="Santanita — administración">
           <BrandLogo height={40} priority />
           <span className={styles.badge}>Administración</span>
         </Link>

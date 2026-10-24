@@ -17,7 +17,7 @@ export const PRODUCT_LIMITS = {
 export function getProductProblems(input: ProductInput, categoryIds: string[]): Partial<Record<keyof ProductInput, string>> {
   const problems: Partial<Record<keyof ProductInput, string>> = {};
   const name = input.name.trim();
-  if (name === '') problems.name = 'Escribe el nombre del postre';
+  if (name === '') problems.name = 'Escribe el nombre del producto';
   else if (name.length > PRODUCT_LIMITS.nameMax) problems.name = `Máximo ${PRODUCT_LIMITS.nameMax} caracteres`;
 
   if (!categoryIds.includes(input.categoryId)) problems.categoryId = 'Elige una categoría';

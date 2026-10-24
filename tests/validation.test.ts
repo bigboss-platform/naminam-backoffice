@@ -41,7 +41,7 @@ describe('business validation', () => {
   it('requires a WhatsApp number with country code', () => {
     assert.ok(getContactProblems({ whatsappNumber: '4126722218', phoneNumber: '', instagramHandle: '' }).whatsappNumber === undefined);
     assert.ok(getContactProblems({ whatsappNumber: '412', phoneNumber: '', instagramHandle: '' }).whatsappNumber);
-    assert.ok(getContactProblems({ whatsappNumber: '584126722218', phoneNumber: '', instagramHandle: 'bad handle' }).instagramHandle);
+    assert.ok(getContactProblems({ whatsappNumber: '51987654321', phoneNumber: '', instagramHandle: 'bad handle' }).instagramHandle);
   });
   it('validates hours rows', () => {
     assert.deepEqual(getHoursRowProblems({ label: 'Martes a viernes', opensAt: '10:00', closesAt: '20:00' }), {});

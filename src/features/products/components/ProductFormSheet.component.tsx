@@ -27,7 +27,7 @@ export function ProductFormSheet({ open, product, formKey, categories, onClose }
     <BottomSheet
       open={open}
       onClose={onClose}
-      title={product ? 'Editar postre' : 'Nuevo postre'}
+      title={product ? 'Editar producto' : 'Nuevo producto'}
       subtitle={product?.name ?? ''}
       size="wide"
     >
@@ -63,7 +63,7 @@ function ProductForm({ product, categories, onSaved }: { product: Product | null
         {/* Only rendered when every required field is valid — never disabled (workspace rule) */}
         {ctx.isComplete && (
           <button type="submit" className={forms.primaryButton}>
-            {ctx.isSaving ? 'Guardando…' : ctx.isEditing ? 'Guardar cambios' : 'Crear postre'}
+            {ctx.isSaving ? 'Guardando…' : ctx.isEditing ? 'Guardar cambios' : 'Crear producto'}
           </button>
         )}
       </div>

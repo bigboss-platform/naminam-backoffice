@@ -1,20 +1,21 @@
 # Local MongoDB for development — `docker compose up -d`
-# Data persists in the named volume `naminam-mongo-data` (survives `docker compose down`;
+# Los Antojitos de Santanita: own container, port 27018 and volume, so it never mixes with Ñami Ñam.
+# Data persists in the named volume `santanita-mongo-data` (survives `docker compose down`;
 # `docker compose down -v` wipes it).
 services:
   mongo:
     image: mongo:7
-    container_name: naminam-mongo
+    container_name: santanita-mongo
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "27018:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-naminam}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-naminam-dev}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-santanita}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-santanita-dev}
     volumes:
-      - naminam-mongo-data:/data/db
+      - santanita-mongo-data:/data/db
     # Keep the container small — this machine has little RAM
     command: ["--wiredTigerCacheSizeGB", "0.25"]
 
 volumes:
-  naminam-mongo-data:
+  santanita-mongo-data:

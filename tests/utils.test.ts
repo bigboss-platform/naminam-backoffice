@@ -23,8 +23,8 @@ describe('money (keypad digits = cents)', () => {
   it('formats with workspace money format and menu format', () => {
     assert.equal(formatMoneyInput(1234.5), '1.234,50');
     assert.equal(formatMoneyInput(6), '6,00');
-    assert.equal(formatMenuPrice(7), '$7');
-    assert.equal(formatMenuPrice(6.5), '$6.50');
+    assert.equal(formatMenuPrice(7), 'S/ 7');
+    assert.equal(formatMenuPrice(6.5), 'S/ 6.50');
   });
 });
 
@@ -49,7 +49,7 @@ describe('time', () => {
 
 describe('phone + slug', () => {
   it('formats Venezuelan numbers', () => {
-    assert.equal(formatPhone('584126722218'), '+58 412 672 2218');
+    assert.equal(formatPhone('51987654321'), '+51 987 654 321');
     assert.equal(formatPhone(''), '');
   });
   it('slugifies Spanish names', () => {

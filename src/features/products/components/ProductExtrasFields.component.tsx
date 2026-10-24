@@ -10,8 +10,8 @@ type FlagName = 'isAvailable' | 'isFeatured' | 'isAddOn';
 
 const FLAG_QUESTIONS: { flag: FlagName; question: string }[] = [
   { flag: 'isAvailable', question: '¿Lo mostramos en el menú?' },
-  { flag: 'isFeatured', question: '¿Va en "Nuestros favoritos" del inicio?' },
-  { flag: 'isAddOn', question: '¿Es un complemento de otros postres?' },
+  { flag: 'isFeatured', question: '¿Va en "Los consentidos de la casa" del inicio?' },
+  { flag: 'isAddOn', question: '¿Es un acompañante de otros productos?' },
 ];
 
 /** Optional details + yes/no switches as pills (workspace rule: pills, never checkboxes). */

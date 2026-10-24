@@ -14,7 +14,7 @@ export type Product = {
   note: string;
   /** Optional ribbon on the photo ("Favorito de la casa"). Empty = none. */
   badge: string;
-  /** Shown in "Nuestros favoritos" (home wheel). */
+  /** Shown in "Los consentidos de la casa" (home wheel). */
   isFeatured: boolean;
   /** Complement sold with other desserts ("Extra de helado"). */
   isAddOn: boolean;

@@ -11,10 +11,10 @@ const INSTAGRAM_HANDLE = /^[a-zA-Z0-9._]{1,30}$/;
 export function getContactProblems(input: ContactInput): Problems<ContactInput> {
   const problems: Problems<ContactInput> = {};
   if (!PHONE_DIGITS.test(input.whatsappNumber)) {
-    problems.whatsappNumber = 'Entre 10 y 15 dígitos, con el código del país (58 para Venezuela)';
+    problems.whatsappNumber = 'Entre 10 y 15 dígitos, con el código del país (51 para Perú)';
   }
   if (input.phoneNumber !== '' && !PHONE_DIGITS.test(input.phoneNumber)) {
-    problems.phoneNumber = 'Entre 10 y 15 dígitos, con el código del país (58 para Venezuela)';
+    problems.phoneNumber = 'Entre 10 y 15 dígitos, con el código del país (51 para Perú)';
   }
   const handle = input.instagramHandle.replace(/^@/, '').trim();
   if (handle !== '' && !INSTAGRAM_HANDLE.test(handle)) {

@@ -19,7 +19,7 @@ export function BusinessContainer({ settings }: { settings: BusinessSettings }) 
 
   return (
     <div className="page-fade-in">
-      <PageHeader title="Negocio" subtitle="Lo que la web muestra sobre Ñami Ñam" info={<InfoSheet {...BUSINESS_INFO} />} />
+      <PageHeader title="Negocio" subtitle="Lo que la web muestra sobre Santanita" info={<InfoSheet {...BUSINESS_INFO} />} />
       <div className={styles.grid}>
         <SettingsCard
           icon="call"

@@ -42,7 +42,7 @@ export async function removeCategory(categoryId: string): Promise<ActionResult> 
     if (!category) return actionFailure('Esta categoría ya no existe.');
     const productCount = await countProductsInCategory(category.slug);
     if (productCount > 0) {
-      const plural = productCount === 1 ? 'postre' : 'postres';
+      const plural = productCount === 1 ? 'producto' : 'productos';
       return actionFailure(`Tiene ${productCount} ${plural}. Muévelos a otra categoría antes de eliminarla.`);
     }
     await deleteCategory(categoryId);
