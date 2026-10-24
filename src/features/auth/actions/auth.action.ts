@@ -2,40 +2,43 @@
 
 import { actionFailure, actionSuccess, type ActionResult } from '@/features/core/types/ActionResult.type';
 import { findAdminByEmail, normalizeEmail } from '@/server/repositories/admins.repository';
-import { clearFailedLogins, getLockMinutesLeft, recordFailedLogin } from '@/server/auth/loginThrottle';
+import { clearFailedLogins, getLockSecondsLeft, recordFailedLogin } from '@/server/auth/loginThrottle';
 import { verifyPassword } from '@/server/auth/password';
 import { createSession, deleteSession } from '@/server/auth/session';
+import { SUPPORT_ERROR, type EmailCheck, type LoginOutcome } from '../types/Login.type';
+import { isEmailFormatValid } from '../utils/email.util';
 
-const UNEXPECTED_ERROR = 'No pudimos conectarnos. Intenta nuevamente en un momento.';
-
-/** Login step 1 — checked when "Siguiente" is pressed (workspace auth rule), never while typing. */
-export async function checkAdminEmail(email: string): Promise<ActionResult> {
+/** Login step 1 — runs automatically once the email has a valid format (no button press). */
+export async function checkAdminEmail(email: string): Promise<ActionResult<EmailCheck>> {
+  const normalizedEmail = normalizeEmail(email);
+  if (!isEmailFormatValid(normalizedEmail)) return actionSuccess<EmailCheck>({ exists: false, lockSecondsLeft: 0 });
   try {
-    const admin = await findAdminByEmail(email);
-    return admin ? actionSuccess(true) : actionFailure('Este correo no está registrado');
+    const admin = await findAdminByEmail(normalizedEmail);
+    const lockSecondsLeft = admin ? await getLockSecondsLeft(normalizedEmail) : 0;
+    return actionSuccess<EmailCheck>({ exists: admin !== null, lockSecondsLeft });
   } catch {
-    return actionFailure(UNEXPECTED_ERROR);
+    return actionFailure<EmailCheck>(SUPPORT_ERROR);
   }
 }
 
-export async function login(email: string, password: string): Promise<ActionResult> {
+export async function login(email: string, password: string): Promise<ActionResult<LoginOutcome>> {
   const normalizedEmail = normalizeEmail(email);
-  const lockMinutes = getLockMinutesLeft(normalizedEmail);
-  if (lockMinutes > 0) {
-    return actionFailure(`Demasiados intentos. Espera ${lockMinutes} min e intenta de nuevo.`);
-  }
   try {
+    const lockSecondsLeft = await getLockSecondsLeft(normalizedEmail);
+    if (lockSecondsLeft > 0) return actionSuccess<LoginOutcome>({ kind: 'locked', lockSecondsLeft });
     const admin = await findAdminByEmail(normalizedEmail);
     const isValid = admin !== null && (await verifyPassword(password, admin.passwordHash));
     if (!admin || !isValid) {
-      recordFailedLogin(normalizedEmail);
-      return actionFailure('La contraseña no es correcta');
+      const failure = await recordFailedLogin(normalizedEmail);
+      return failure.lockSecondsLeft > 0
+        ? actionSuccess<LoginOutcome>({ kind: 'locked', lockSecondsLeft: failure.lockSecondsLeft })
+        : actionSuccess<LoginOutcome>({ kind: 'wrong-password', attemptsLeft: failure.attemptsLeft });
     }
-    clearFailedLogins(normalizedEmail);
+    await clearFailedLogins(normalizedEmail);
     await createSession({ adminId: admin.id, email: admin.email, name: admin.name });
-    return actionSuccess(true);
+    return actionSuccess<LoginOutcome>({ kind: 'signed-in' });
   } catch {
-    return actionFailure(UNEXPECTED_ERROR);
+    return actionFailure<LoginOutcome>(SUPPORT_ERROR);
   }
 }
 

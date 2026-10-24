@@ -26,6 +26,7 @@ export async function saveCategory(categoryId: string, rawInput: CategoryInput):
     if (categoryId === '') await createCategory(input);
     else if (!(await updateCategory(categoryId, input))) return actionFailure('Esta categoría ya no existe.');
     revalidatePath('/productos');
+    revalidatePath('/categorias');
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {
@@ -46,6 +47,7 @@ export async function removeCategory(categoryId: string): Promise<ActionResult> 
     }
     await deleteCategory(categoryId);
     revalidatePath('/productos');
+    revalidatePath('/categorias');
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {
@@ -58,6 +60,7 @@ export async function reorderCategory(categoryId: string, direction: -1 | 1): Pr
   try {
     await moveCategory(categoryId, direction);
     revalidatePath('/productos');
+    revalidatePath('/categorias');
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {

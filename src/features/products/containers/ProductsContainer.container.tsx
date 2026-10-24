@@ -1,7 +1,6 @@
 'use client';
 
-import { CategoriesSection } from '@/features/categories/components/CategoriesSection.component';
-import { useCategoriesManager } from '@/features/categories/hooks/useCategoriesManager.hook';
+import { useRouter } from 'next/navigation';
 import { ConfirmSheet } from '@/features/core/components/ConfirmSheet.component';
 import { EmptyState } from '@/features/core/components/EmptyState.component';
 import forms from '@/features/core/components/forms.module.css';
@@ -18,28 +17,33 @@ import styles from './ProductsContainer.module.css';
 
 export function ProductsContainer({ products, categories }: { products: Product[]; categories: Category[] }) {
   const ctx = useProductsPage(products, categories);
-  const productCountBySlug = Object.fromEntries(ctx.sections.map((section) => [section.category.slug, section.products.length]));
-  const categoriesCtx = useCategoriesManager(categories, productCountBySlug);
+  const router = useRouter();
 
   return (
     <div className="page-fade-in">
-      <PageHeader title="Productos" subtitle={`${products.length} postres en el menú`} info={<InfoSheet {...PRODUCTS_INFO} />} />
+      <PageHeader
+        title="Productos"
+        subtitle={products.length === 1 ? '1 postre en el menú' : `${products.length} postres en el menú`}
+        info={<InfoSheet {...PRODUCTS_INFO} />}
+        action={
+          ctx.hasCategories && (
+            <button type="button" className={`${forms.primaryButton} ${styles.newButton}`} onClick={ctx.openNewProduct}>
+              <span className="material-symbols-outlined">add</span>
+              Nuevo postre
+            </button>
+          )
+        }
+      />
 
       {ctx.hasCategories ? (
         <>
-          <button type="button" className={`${forms.primaryButton} ${styles.newButton}`} onClick={ctx.openNewProduct}>
-            <span className="material-symbols-outlined">add</span>
-            Nuevo postre
-          </button>
           {ctx.sections.map((section) => (
-            <ProductSection key={section.category.id} section={section} onOpenProduct={ctx.openActions} />
+            <ProductSection key={section.category.id} section={section} ctx={ctx} />
           ))}
         </>
       ) : (
-        <EmptyState icon="category" title="Aún no hay categorías" text="Crea una categoría para empezar a agregar postres." actionLabel="Crear categoría" onAction={categoriesCtx.openNewCategory} />
+        <EmptyState icon="category" title="Aún no hay categorías" text="Crea una categoría para empezar a agregar postres." actionLabel="Crear categoría" onAction={() => router.push('/categorias')} />
       )}
-
-      <CategoriesSection ctx={categoriesCtx} />
 
       <ProductActionsSheet ctx={ctx} />
       <ProductFormSheet open={ctx.isFormOpen} product={ctx.formProduct} formKey={ctx.formKey} categories={categories} onClose={ctx.closeForm} />

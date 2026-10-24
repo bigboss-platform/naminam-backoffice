@@ -14,11 +14,15 @@ type BottomSheetProps = {
   title: string;
   /** Optional second line under the title (e.g. the product name being edited). */
   subtitle?: string;
+  /** Optional media (e.g. a big product photo) shown first, above the title. */
+  media?: ReactNode;
+  /** Desktop modal width: "wide" for two-column forms (e.g. dessert form + live preview). */
+  size?: 'normal' | 'wide';
   children: ReactNode;
 };
 
 /** iOS-style bottom drawer with a title: backdrop tap or Escape closes it (workspace rule: no close/X button). */
-export function BottomSheet({ open, onClose, title, subtitle = '', children }: BottomSheetProps) {
+export function BottomSheet({ open, onClose, title, subtitle = '', media, size = 'normal', children }: BottomSheetProps) {
   const { mounted, entered, closing } = useSlideSheet(open);
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -50,7 +54,7 @@ export function BottomSheet({ open, onClose, title, subtitle = '', children }: B
       onClick={closing ? undefined : onClose}
     >
       <div
-        className={`${styles.sheet} ${entered ? styles.sheetOpen : ''}`}
+        className={`${styles.sheet} ${size === 'wide' ? styles.sheetWide : ''} ${entered ? styles.sheetOpen : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label={title}
@@ -58,6 +62,7 @@ export function BottomSheet({ open, onClose, title, subtitle = '', children }: B
       >
         <span className={styles.grabber} aria-hidden="true" />
         <div className={`${styles.content} ${isRevealed ? styles.contentRevealed : ''}`}>
+          {media}
           <header className={styles.header}>
             <h2 className={`${styles.title} font-display`}>{title}</h2>
             {subtitle && <p className={styles.subtitle}>{subtitle}</p>}

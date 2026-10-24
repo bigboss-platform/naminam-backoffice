@@ -1,3 +1,18 @@
+/* Anchor for the desktop dropdown; raised above the next rows while it's open */
+.wrap {
+  position: relative;
+}
+
+.wrapMenuOpen {
+  z-index: 5;
+}
+
+@media (min-width: 768px), (hover: hover) and (pointer: fine) {
+  .thumb {
+    cursor: zoom-in;
+  }
+}
+
 .row {
   width: 100%;
   display: flex;
@@ -9,7 +24,7 @@
   background: var(--c-card);
   text-align: left;
   box-shadow: var(--shadow-1);
-  transition: transform 300ms var(--ease-spring), opacity 200ms ease;
+  transition: transform 300ms var(--ease-spring), box-shadow 300ms ease, opacity 200ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -93,8 +108,10 @@
   color: var(--c-cacao);
 }
 
-.chevron {
-  flex-shrink: 0;
-  font-size: 20px;
-  color: var(--c-cocoa);
+/* Desktop hover: the card grows slightly (stagger-in lives on .wrap so it can't override this transform) */
+@media (hover: hover) and (pointer: fine) {
+  .row:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 28px -12px rgba(61, 35, 20, 0.3);
+  }
 }

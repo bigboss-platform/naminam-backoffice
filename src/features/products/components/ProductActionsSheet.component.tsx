@@ -5,10 +5,13 @@ import forms from '@/features/core/components/forms.module.css';
 import { SheetActions } from '@/features/core/components/SheetActions.component';
 import { formatMenuPrice } from '@/features/core/utils/format.util';
 import type { ProductsPageCtx } from '../hooks/useProductsPage.hook';
+import { getProductActions } from '../utils/productActions.util';
+import { ProductMedia } from './ProductMedia.component';
+import styles from './ProductActionsSheet.module.css';
 
-/** Tap a dessert → edit, hide/show on the menu, add/remove from favourites, delete. */
+/** Mobile: tap a dessert. Desktop: tap its photo. Big photo first, then the actions. */
 export function ProductActionsSheet({ ctx }: { ctx: ProductsPageCtx }) {
-  const { selected, isActionsOpen, closeActions, editSelected, askDeleteSelected, toggleFlag, actionError, isWorking } = ctx;
+  const { selected, isActionsOpen, closeActions, actionError, isWorking } = ctx;
   if (!selected) return null;
 
   return (
@@ -17,27 +20,24 @@ export function ProductActionsSheet({ ctx }: { ctx: ProductsPageCtx }) {
       onClose={closeActions}
       title={selected.name}
       subtitle={`${formatMenuPrice(selected.price)}${selected.isAvailable ? '' : ' · Oculto en el menú'}`}
+      media={
+        selected.mediaUrl ? (
+          <div className={styles.photo}>
+            <ProductMedia
+              mediaType={selected.mediaType}
+              mediaUrl={selected.mediaUrl}
+              posterUrl={selected.posterUrl}
+              alt={selected.name}
+              isLive
+              sizes="(min-width: 768px) 560px, 100vw"
+            />
+          </div>
+        ) : undefined
+      }
     >
       {actionError && <p className={forms.formError}>{actionError}</p>}
       {isWorking && <p className={forms.label}>Guardando…</p>}
-      <SheetActions
-        actions={[
-          { id: 'edit', icon: 'edit', label: 'Editar', onSelect: editSelected },
-          {
-            id: 'availability',
-            icon: selected.isAvailable ? 'visibility_off' : 'visibility',
-            label: selected.isAvailable ? 'Ocultar del menú' : 'Mostrar en el menú',
-            onSelect: () => void toggleFlag('isAvailable'),
-          },
-          {
-            id: 'featured',
-            icon: 'star',
-            label: selected.isFeatured ? 'Quitar de "Nuestros favoritos"' : 'Agregar a "Nuestros favoritos"',
-            onSelect: () => void toggleFlag('isFeatured'),
-          },
-          { id: 'delete', icon: 'delete', label: 'Eliminar', onSelect: askDeleteSelected, isDanger: true },
-        ]}
-      />
+      <SheetActions actions={getProductActions(ctx)} />
     </BottomSheet>
   );
 }

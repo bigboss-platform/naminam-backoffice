@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Vollkorn } from 'next/font/google';
 import localFont from 'next/font/local';
+import { AuthTransitionProvider } from '@/features/core/components/AuthTransition.component';
 import './globals.css';
 
 const displayFont = Vollkorn({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
@@ -33,7 +34,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       lang="es"
       className={`${displayFont.variable} ${sansFont.variable} ${iconFont.variable} ${iconFilledFont.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <AuthTransitionProvider>{children}</AuthTransitionProvider>
+      </body>
     </html>
   );
 }

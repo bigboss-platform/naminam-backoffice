@@ -1,13 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { logout } from '@/features/auth/actions/auth.action';
-import { BottomSheet } from '@/features/core/components/BottomSheet.component';
 import { InfoSheet } from '@/features/core/components/InfoSheet.component';
 import { PageHeader } from '@/features/core/components/PageHeader.component';
 import { SheetActions } from '@/features/core/components/SheetActions.component';
-import { ChangePasswordForm } from '../components/ChangePasswordForm.component';
+import { ChangePasswordSheet } from '../components/ChangePasswordSheet.component';
+import { useAccountActions } from '../hooks/useAccountActions.hook';
 import styles from './AccountContainer.module.css';
 
 const ACCOUNT_INFO = {
@@ -20,17 +17,9 @@ const ACCOUNT_INFO = {
   glossary: [{ term: 'Sesión', meaning: 'El tiempo que el panel te recuerda sin pedir la contraseña otra vez.' }],
 };
 
+/** Mobile "Cuenta" tab. On desktop the same actions live in the top bar dropdown (AccountMenu). */
 export function AccountContainer({ name, email }: { name: string; email: string }) {
-  const router = useRouter();
-  const [isPasswordOpen, setIsPasswordOpen] = useState(false);
-  const [formKey, setFormKey] = useState(0);
-  const [passwordChanged, setPasswordChanged] = useState(false);
-
-  const signOut = async () => {
-    await logout();
-    router.replace('/login');
-    router.refresh();
-  };
+  const ctx = useAccountActions();
 
   return (
     <div className="page-fade-in">
@@ -44,18 +33,16 @@ export function AccountContainer({ name, email }: { name: string; email: string 
           <span className={styles.email}>{email}</span>
         </span>
       </section>
-      {passwordChanged && <p className={styles.success}>Contraseña actualizada.</p>}
+      {ctx.passwordChanged && <p className={styles.success}>Contraseña actualizada.</p>}
       <div className={styles.actions}>
         <SheetActions
           actions={[
-            { id: 'password', icon: 'lock', label: 'Cambiar contraseña', onSelect: () => { setFormKey((key) => key + 1); setPasswordChanged(false); setIsPasswordOpen(true); } },
-            { id: 'logout', icon: 'logout', label: 'Cerrar sesión', onSelect: () => void signOut(), isDanger: true },
+            { id: 'password', icon: 'lock', label: 'Cambiar contraseña', onSelect: ctx.openPassword },
+            { id: 'logout', icon: 'logout', label: 'Cerrar sesión', onSelect: () => void ctx.signOut(), isDanger: true },
           ]}
         />
       </div>
-      <BottomSheet open={isPasswordOpen} onClose={() => setIsPasswordOpen(false)} title="Cambiar contraseña">
-        <ChangePasswordForm key={formKey} onSaved={() => { setIsPasswordOpen(false); setPasswordChanged(true); }} />
-      </BottomSheet>
+      <ChangePasswordSheet ctx={ctx} />
     </div>
   );
 }

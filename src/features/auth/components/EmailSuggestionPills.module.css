@@ -1,0 +1,28 @@
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+/* Solid brand fill so they read on the cream page (outlined + transparent was illegible) */
+.pill {
+  min-height: 32px;
+  padding: 0 var(--space-12);
+  border-radius: var(--radius-pill);
+  background: var(--c-cacao);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--c-card);
+}
+
+.pill:active {
+  background: var(--c-cacao-deep);
+}
+
+/* The lone "@" pill is a square-ish key, easier to hit than a 1-character pill */
+.atPill {
+  min-width: 44px;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+}

@@ -35,6 +35,7 @@ export async function saveProduct(productId: string, rawInput: ProductInput): Pr
       return actionFailure('Este postre ya no existe. Recarga la página.');
     }
     revalidatePath('/productos');
+    revalidatePath('/categorias');
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {
@@ -51,6 +52,7 @@ export async function toggleProductFlag(
   try {
     if (!(await setProductFlag(productId, flag, value))) return actionFailure('Este postre ya no existe.');
     revalidatePath('/productos');
+    revalidatePath('/categorias');
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {
@@ -63,6 +65,7 @@ export async function removeProduct(productId: string): Promise<ActionResult> {
   try {
     await deleteProduct(productId);
     revalidatePath('/productos');
+    revalidatePath('/categorias');
     await refreshPublicSite();
     return actionSuccess(true);
   } catch {

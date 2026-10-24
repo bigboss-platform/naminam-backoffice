@@ -2,8 +2,10 @@
   padding: var(--space-lg) 0 var(--space-md);
 }
 
+/* Mobile: title ↔ ⓘ on the first line, the action wraps full width below */
 .titleRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-sm);
@@ -16,14 +18,30 @@
   color: var(--c-cacao);
 }
 
+.action {
+  flex-basis: 100%;
+  margin-top: var(--space-sm);
+}
+
 .subtitle {
-  margin-top: var(--space-xs);
+  margin-top: var(--space-12);
   font-size: var(--font-size-md);
   color: var(--c-cocoa);
 }
 
+/* Desktop: [Title][ⓘ] ............ [action] */
 @media (min-width: 900px) {
   .header {
     padding-top: var(--space-2xl);
+  }
+
+  .titleRow {
+    justify-content: flex-start;
+  }
+
+  .action {
+    flex-basis: auto;
+    margin-top: 0;
+    margin-left: auto;
   }
 }

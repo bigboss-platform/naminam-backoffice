@@ -1,0 +1,7 @@
+/* Big photo at the top of the sheet / modal */
+.photo {
+  aspect-ratio: 4 / 3;
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}

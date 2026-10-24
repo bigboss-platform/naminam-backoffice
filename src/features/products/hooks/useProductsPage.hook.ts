@@ -17,6 +17,8 @@ export type ProductSectionData = { category: Category; products: Product[] };
 export function useProductsPage(products: Product[], categories: Category[]) {
   const [selected, setSelected] = useState<Product | null>(null);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
+  /** Desktop: the row's dropdown menu (mobile always uses the actions sheet). */
+  const [menuProductId, setMenuProductId] = useState('');
   const [formProduct, setFormProduct] = useState<Product | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
@@ -37,14 +39,24 @@ export function useProductsPage(products: Product[], categories: Category[]) {
 
   /** Close the actions sheet first, then open the next sheet (avoids stacked-sheet z-index clashes). */
   const closeActionsAndThen = (next: () => void) => {
+    const wasSheetOpen = isActionsOpen;
     setIsActionsOpen(false);
-    setTimeout(next, SHEET_CLOSE_MS);
+    setMenuProductId('');
+    if (wasSheetOpen) setTimeout(next, SHEET_CLOSE_MS);
+    else next();
   };
 
   const openActions = (product: Product) => {
     setSelected(product);
     setActionError('');
+    setMenuProductId('');
     setIsActionsOpen(true);
+  };
+
+  const toggleMenu = (product: Product) => {
+    setSelected(product);
+    setActionError('');
+    setMenuProductId((current) => (current === product.id ? '' : product.id));
   };
 
   const toggleFlag = async (flag: 'isAvailable' | 'isFeatured') => {
@@ -54,6 +66,7 @@ export function useProductsPage(products: Product[], categories: Category[]) {
     setIsWorking(false);
     if (!result.ok) return setActionError(result.error);
     setIsActionsOpen(false);
+    setMenuProductId('');
   };
 
   const confirmDelete = async () => {
@@ -73,6 +86,9 @@ export function useProductsPage(products: Product[], categories: Category[]) {
     isActionsOpen,
     openActions,
     closeActions: () => setIsActionsOpen(false),
+    menuProductId,
+    toggleMenu,
+    closeMenu: () => setMenuProductId(''),
     editSelected: () => closeActionsAndThen(() => openForm(selected)),
     askDeleteSelected: () => closeActionsAndThen(() => setIsDeleteOpen(true)),
     toggleFlag,

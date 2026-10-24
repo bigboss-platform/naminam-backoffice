@@ -1,0 +1,62 @@
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-sm));
+  right: 0;
+  z-index: 40;
+  min-width: 260px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  box-shadow: 0 16px 40px -12px rgba(61, 35, 20, 0.3);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  visibility: hidden;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms;
+}
+
+.menuOpen {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 0s;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-height: 44px;
+  padding: 0 var(--space-12);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  color: var(--c-text);
+  text-align: left;
+}
+
+.item:hover {
+  background: var(--c-chip);
+}
+
+.item :global(.material-symbols-outlined) {
+  font-size: 20px;
+  color: var(--c-cocoa);
+}
+
+/* Danger (Eliminar, Cerrar sesión): red, set apart by a line — same as SheetActions .danger */
+.danger {
+  margin-top: var(--space-xs);
+  border-top: 1px solid var(--c-border);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  color: var(--c-red-border);
+}
+
+.danger:hover {
+  background: rgba(186, 26, 26, 0.08);
+}
+
+.danger :global(.material-symbols-outlined) {
+  color: var(--c-red-border);
+}

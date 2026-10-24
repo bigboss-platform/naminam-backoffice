@@ -43,12 +43,99 @@
   color: var(--c-cocoa);
 }
 
+/* API in progress: input locked (readOnly) + diagonal light sweep across the field (from
+   axion-bo-nuxt's login). Painted on the wrapper's ::after, not the <input> — Chrome paints
+   its own layer over password inputs and hides background-image. */
+.inputRow {
+  position: relative;
+}
+
+.inputRowBusy {
+  cursor: not-allowed;
+}
+
+.inputRowBusy .input {
+  cursor: not-allowed;
+}
+
+.inputRowBusy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: linear-gradient(
+    100deg,
+    transparent 35%,
+    color-mix(in srgb, var(--c-fresa) 28%, transparent) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  animation: field-shimmer 1.3s ease-in-out infinite;
+}
+
+@keyframes field-shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+/* Neutral notice (wrong password) — never red, it informs instead of scolding */
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-top: var(--space-12);
+  padding: var(--space-12) var(--space-md);
+  border-radius: var(--radius);
+  background: var(--c-chip);
+  font-size: var(--font-size-sm);
+  color: var(--c-text-muted);
+}
+
+.notice :global(.material-symbols-outlined) {
+  font-size: 18px;
+  color: var(--c-cocoa);
+}
+
+/* Lock countdown: "Se desbloquea en" + big mm:ss counting down */
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-lg);
+}
+
+.countdownLabel {
+  font-size: var(--font-size-sm);
+  color: var(--c-cocoa);
+}
+
+.countdownValue {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-cacao);
+}
+
 .primary {
   margin-top: var(--space-lg);
 }
 
 .secondary {
   margin-top: var(--space-sm);
+}
+
+/* Secondary action (Volver, Reintentar) filled with the brand's secondary color (fresa) +
+   cacao text (~5:1) — the outlined transparent version didn't show on the cream page */
+.secondaryFill {
+  border-color: var(--c-fresa);
+  background: var(--c-fresa);
+  color: var(--c-cacao);
 }
 
 @keyframes slideInFromRight {

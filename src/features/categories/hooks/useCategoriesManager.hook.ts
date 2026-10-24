@@ -6,7 +6,7 @@ import { removeCategory, reorderCategory } from '../actions/category.action';
 
 const SHEET_CLOSE_MS = 300;
 
-/** Categories section: actions sheet (edit / move / delete) + form sheet + delete confirmation. */
+/** Categorías page: actions sheet / desktop dropdown (edit / move / delete) + form sheet + delete confirmation. */
 export function useCategoriesManager(categories: Category[], productCountBySlug: Record<string, number>) {
   const [selected, setSelected] = useState<Category | null>(null);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
@@ -23,9 +23,20 @@ export function useCategoriesManager(categories: Category[], productCountBySlug:
     setIsFormOpen(true);
   };
 
+  /** Desktop: the row's dropdown menu (mobile always uses the actions sheet). */
+  const [menuCategoryId, setMenuCategoryId] = useState('');
+
   const closeActionsAndThen = (next: () => void) => {
+    const wasSheetOpen = isActionsOpen;
     setIsActionsOpen(false);
-    setTimeout(next, SHEET_CLOSE_MS);
+    setMenuCategoryId('');
+    if (wasSheetOpen) setTimeout(next, SHEET_CLOSE_MS);
+    else next();
+  };
+
+  const closeAll = () => {
+    setIsActionsOpen(false);
+    setMenuCategoryId('');
   };
 
   const run = async (task: () => Promise<{ ok: boolean; error?: string }>, onSuccess: () => void) => {
@@ -47,14 +58,22 @@ export function useCategoriesManager(categories: Category[], productCountBySlug:
     openActions: (category: Category) => {
       setSelected(category);
       setError('');
+      setMenuCategoryId('');
       setIsActionsOpen(true);
     },
     closeActions: () => setIsActionsOpen(false),
+    menuCategoryId,
+    toggleMenu: (category: Category) => {
+      setSelected(category);
+      setError('');
+      setMenuCategoryId((current) => (current === category.id ? '' : category.id));
+    },
+    closeMenu: () => setMenuCategoryId(''),
     canMoveUp: selectedIndex > 0,
     canMoveDown: selectedIndex !== -1 && selectedIndex < categories.length - 1,
     move: (direction: -1 | 1) => {
       if (!selected) return;
-      void run(() => reorderCategory(selected.id, direction), () => setIsActionsOpen(false));
+      void run(() => reorderCategory(selected.id, direction), closeAll);
     },
     editSelected: () => closeActionsAndThen(() => openForm(selected)),
     askDeleteSelected: () => closeActionsAndThen(() => {

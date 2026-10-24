@@ -1,0 +1,74 @@
+/* Anchor for the desktop dropdown; raised above the next rows while it's open */
+.wrap {
+  position: relative;
+}
+
+.wrapMenuOpen {
+  z-index: 5;
+}
+
+/* Same card look as a product row */
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-height: 64px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  text-align: left;
+  box-shadow: var(--shadow-1);
+  transition: transform 300ms var(--ease-spring), box-shadow 300ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.row:active {
+  transform: scale(0.98);
+  transition: transform 100ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .row:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 28px -12px rgba(61, 35, 20, 0.3);
+  }
+}
+
+.icon {
+  flex: 0 0 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  background: var(--c-fresa-soft);
+  color: var(--c-fresa-deep);
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  overflow: hidden;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--c-cacao);
+}
+
+.meta {
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--c-cocoa);
+}

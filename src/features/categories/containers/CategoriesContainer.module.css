@@ -1,0 +1,17 @@
+.list {
+  display: grid;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+}
+
+@media (min-width: 900px) {
+  .newButton {
+    width: auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
+  }
+}

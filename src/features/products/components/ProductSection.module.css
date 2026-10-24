@@ -8,6 +8,23 @@
   font-weight: 600;
   color: var(--c-cacao);
   animation: fadeInUp 260ms ease both;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Product count right next to the category title */
+.count {
+  min-width: 28px;
+  padding: 0 var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--c-fresa-soft);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  color: var(--c-fresa-deep);
 }
 
 .list {

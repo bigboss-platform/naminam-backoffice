@@ -32,4 +32,5 @@ export const COLLECTIONS = {
   products: 'products',
   categories: 'categories',
   settings: 'settings',
+  loginAttempts: 'loginAttempts',
 } as const;

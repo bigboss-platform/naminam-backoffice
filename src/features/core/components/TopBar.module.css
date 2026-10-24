@@ -40,13 +40,35 @@
   display: none;
 }
 
+/* Mobile only: person icon → Cuenta (Cuenta is not a bottom tab) */
+.accountIcon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: calc(var(--space-sm) * -1);
+  border-radius: 50%;
+  color: var(--c-cocoa);
+}
+
+.accountIconActive {
+  background: var(--c-fresa-soft);
+  color: var(--c-fresa-deep);
+}
+
 @media (min-width: 900px) {
+  .accountIcon {
+    display: none;
+  }
+
   .inner {
     height: 72px;
   }
 
   .desktopNav {
     display: flex;
+    align-items: center;
     gap: var(--space-xl);
   }
 

@@ -2,70 +2,110 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { checkAdminEmail, login } from '../actions/auth.action';
+import { useAuthTransition } from '@/features/core/components/AuthTransition.component';
+import { login } from '../actions/auth.action';
+import { sanitizeEmailInput, withMinDuration } from '../utils/email.util';
+import { useEmailCheck } from './useEmailCheck.hook';
+import { useLockCountdown } from './useLockCountdown.hook';
 
 export type LoginStep = 'email' | 'password';
 
-const EMAIL_FORMAT = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 /**
- * One field per step (workspace auth rule): email → password. The email is checked only
- * when "Siguiente" is pressed (never while typing); errors are specific.
+ * One field per step (workspace auth rule): email → password. The email is checked
+ * automatically once it looks complete; a found email slides straight to the password.
+ * No red errors: suggestions, neutral notices, placeholder animations and a lock countdown.
  */
 export function useLoginWizard() {
   const router = useRouter();
+  const authTransition = useAuthTransition();
   const [step, setStep] = useState<LoginStep>('email');
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  /** Email already found by the server — after "Volver" it is not re-checked (no auto-bounce). */
+  const [confirmedEmail, setConfirmedEmail] = useState('');
+  /** 0 = no wrong-password notice. */
+  const [attemptsLeft, setAttemptsLeft] = useState(0);
+  const [hasServerError, setHasServerError] = useState(false);
   const [isWorking, setIsWorking] = useState(false);
+  const lock = useLockCountdown();
 
-  const value = step === 'email' ? email : password;
-  const hasValue = value.trim() !== '';
-  const formatProblem = step === 'email' && email !== '' && !EMAIL_FORMAT.test(email.trim()) ? 'Revisa el formato del correo (ej. nombre@gmail.com)' : '';
-
-  const setValue = (nextValue: string) => {
-    setError('');
-    if (step === 'email') setEmail(nextValue);
-    else setPassword(nextValue);
-  };
-
-  const submitEmail = async () => {
-    if (formatProblem) return;
-    setIsWorking(true);
-    const result = await checkAdminEmail(email);
-    setIsWorking(false);
-    if (!result.ok) return setError(result.error);
+  const showPasswordStep = () => {
     setDirection('forward');
     setStep('password');
   };
 
-  const submitPassword = async () => {
-    setIsWorking(true);
-    const result = await login(email, password);
-    if (!result.ok) {
-      setIsWorking(false);
-      return setError(result.error);
-    }
-    router.replace('/productos');
-    router.refresh();
+  const emailCheck = useEmailCheck(email, step === 'email' && email !== confirmedEmail, (lockSecondsLeft) => {
+    setConfirmedEmail(email);
+    lock.startLock(lockSecondsLeft);
+    showPasswordStep();
+  });
+
+  const changeEmail = (raw: string) => {
+    emailCheck.reset();
+    setEmail(sanitizeEmailInput(raw));
   };
 
-  const next = () => {
-    if (!hasValue || isWorking) return;
-    if (step === 'email') void submitEmail();
-    else void submitPassword();
+  const changePassword = (value: string) => {
+    if (isWorking) return;
+    setAttemptsLeft(0);
+    setHasServerError(false);
+    setPassword(value);
+  };
+
+  const submitPassword = async () => {
+    if (password === '' || isWorking || lock.secondsLeft > 0) return;
+    setIsWorking(true);
+    setHasServerError(false);
+    const result = await withMinDuration(login(email, password));
+    if (!result.ok) {
+      setIsWorking(false);
+      return setHasServerError(true);
+    }
+    const outcome = result.data;
+    if (outcome.kind === 'signed-in') {
+      await authTransition.play(() => {
+        router.replace('/productos');
+        router.refresh();
+      }, '/productos');
+      return;
+    }
+    setIsWorking(false);
+    setPassword('');
+    if (outcome.kind === 'locked') {
+      setAttemptsLeft(0);
+      lock.startLock(outcome.lockSecondsLeft);
+    } else {
+      setAttemptsLeft(outcome.attemptsLeft);
+    }
   };
 
   const back = () => {
-    setError('');
     setPassword('');
+    setAttemptsLeft(0);
+    setHasServerError(false);
     setDirection('backward');
     setStep('email');
   };
 
-  return { step, direction, value, setValue, hasValue, error, formatProblem, isWorking, next, back };
+  return {
+    step,
+    direction,
+    email,
+    changeEmail,
+    emailStatus: emailCheck.status,
+    retryEmailCheck: emailCheck.retry,
+    isEmailConfirmed: email !== '' && email === confirmedEmail,
+    continueWithEmail: showPasswordStep,
+    password,
+    changePassword,
+    attemptsLeft,
+    hasServerError,
+    isWorking,
+    lockSecondsLeft: lock.secondsLeft,
+    submitPassword,
+    back,
+  };
 }
 
 export type LoginWizardCtx = ReturnType<typeof useLoginWizard>;

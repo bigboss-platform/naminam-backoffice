@@ -42,6 +42,8 @@ await db.collection('admins').createIndex({ email: 1 }, { unique: true });
 await db.collection('products').createIndex({ slug: 1 }, { unique: true });
 await db.collection('products').createIndex({ categoryId: 1, sortOrder: 1 });
 await db.collection('categories').createIndex({ slug: 1 }, { unique: true });
+// Login lockout (server/auth/loginThrottle.ts) — old attempts expire by themselves
+await db.collection('loginAttempts').createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 if (isReset) {
   await Promise.all(['products', 'categories', 'settings'].map((name) => db.collection(name).deleteMany({})));

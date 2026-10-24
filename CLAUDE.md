@@ -70,7 +70,7 @@ Types: `features/products/types/*.type.ts`, `features/business/types/BusinessSet
 
 ```
 src/
-  app/                  login/, (admin)/{productos,negocio,cuenta}/ — thin pages (session + data → Container)
+  app/                  login/, (admin)/{productos,categorias,negocio,cuenta}/ — thin pages (session + data → Container)
   proxy.ts
   server/               db/mongo.ts, auth/{session,dal,password,loginThrottle}.ts,
                         repositories/*.repository.ts, publicSite.ts      (all server-only)

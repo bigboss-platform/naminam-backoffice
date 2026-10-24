@@ -1,0 +1,45 @@
+/* Off-screen right at rest ('entering' frame has no transition on purpose) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-bg);
+  transform: translateX(100%);
+}
+
+.visible {
+  transform: translateX(0);
+  transition: transform 450ms ease-in-out;
+}
+
+.leaving {
+  transform: translateX(-100%);
+  transition: transform 450ms ease-in-out;
+}
+
+/* The logo settles in slightly after the screen arrives */
+.logo {
+  display: block;
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 400ms ease-out 200ms,
+    transform 500ms var(--ease-spring) 200ms;
+}
+
+.visible .logo,
+.leaving .logo {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visible,
+  .leaving,
+  .logo {
+    transition: none;
+  }
+}

@@ -1,7 +1,3 @@
-.newButton {
-  margin-bottom: var(--space-sm);
-}
-
 @media (min-width: 900px) {
   .newButton {
     width: auto;

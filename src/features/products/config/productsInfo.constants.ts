@@ -6,9 +6,9 @@ export const PRODUCTS_INFO: { title: string; howItWorks: string[]; glossary: Glo
   howItWorks: [
     'Toca un postre para editarlo, ocultarlo del menú, ponerlo en "Nuestros favoritos" o eliminarlo.',
     'Las fotos y videos no se suben aquí: súbelos a un servicio como Cloudinary y pega el enlace directo del archivo.',
-    'Antes de guardar, usa «Ver cómo se verá» para revisar la tarjeta tal como aparecerá en el menú.',
+    'Mientras llenas el formulario ves la tarjeta en vivo, tal como aparecerá en el menú.',
     'Si un postre se agota, ocúltalo en vez de eliminarlo: así conservas su foto y descripción.',
-    'Las categorías se administran al final de la página; su orden es el orden del menú.',
+    'Las categorías se administran en la sección «Categorías»; su orden es el orden del menú.',
   ],
   glossary: [
     { term: 'Oculto', meaning: 'El postre existe pero no aparece en el menú público.' },

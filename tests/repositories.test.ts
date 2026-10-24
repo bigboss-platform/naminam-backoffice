@@ -14,6 +14,7 @@ process.env.MONGODB_DB = TEST_DB;
 const categories = await import('@/server/repositories/categories.repository');
 const products = await import('@/server/repositories/products.repository');
 const settings = await import('@/server/repositories/settings.repository');
+const throttle = await import('@/server/auth/loginThrottle');
 
 async function dropTestDb() {
   const client = await new MongoClient(process.env.MONGODB_URI as string).connect();
@@ -79,5 +80,19 @@ describe('settings repository', () => {
 
     await settings.deleteHoursRow(rowId);
     assert.equal((await settings.getBusinessSettings()).hours.length, 0);
+  });
+});
+
+describe('login lockout (MongoDB)', () => {
+  it('counts down attempts, locks on the 5th and clears on success', async () => {
+    const email = 'lock@test.com';
+    for (let attempt = 1; attempt <= 4; attempt += 1) {
+      assert.deepEqual(await throttle.recordFailedLogin(email), { attemptsLeft: 5 - attempt, lockSecondsLeft: 0 });
+    }
+    assert.deepEqual(await throttle.recordFailedLogin(email), { attemptsLeft: 0, lockSecondsLeft: 600 });
+    const secondsLeft = await throttle.getLockSecondsLeft(email);
+    assert.ok(secondsLeft > 590 && secondsLeft <= 600);
+    await throttle.clearFailedLogins(email);
+    assert.equal(await throttle.getLockSecondsLeft(email), 0);
   });
 });

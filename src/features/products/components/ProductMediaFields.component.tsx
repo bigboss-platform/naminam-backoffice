@@ -5,8 +5,6 @@ import forms from '@/features/core/components/forms.module.css';
 import { PillChoice } from '@/features/core/components/PillChoice.component';
 import type { ProductFormCtx } from '../hooks/useProductForm.hook';
 import type { MediaType } from '../types/Product.type';
-import { ProductPreview } from './ProductPreview.component';
-import styles from './ProductMediaFields.module.css';
 
 const MEDIA_OPTIONS: { value: MediaType; label: string }[] = [
   { value: 'image', label: 'Foto' },
@@ -14,11 +12,11 @@ const MEDIA_OPTIONS: { value: MediaType; label: string }[] = [
 ];
 
 /**
- * No media server: the admin pastes a public link to the photo/video. Once there's a
- * usable link, "Ver cómo se verá" shows the card exactly as the menu will show it.
+ * First fields of the form (the photo leads the menu card). No media server: the admin
+ * pastes a public link; the live preview shows it as soon as the link is usable.
  */
 export function ProductMediaFields({ ctx }: { ctx: ProductFormCtx }) {
-  const { input, setText, update, touch, errorFor, canPreview, isPreviewOpen, togglePreview } = ctx;
+  const { input, setText, update, touch, errorFor } = ctx;
   const isVideo = input.mediaType === 'video';
 
   return (
@@ -61,18 +59,6 @@ export function ProductMediaFields({ ctx }: { ctx: ProductFormCtx }) {
               onBlur={() => touch('posterUrl')}
             />
           </FormField>
-        </div>
-      </div>
-
-      {canPreview && (
-        <button type="button" className={`${forms.secondaryButton} ${styles.previewButton}`} onClick={togglePreview}>
-          <span className="material-symbols-outlined">{isPreviewOpen ? 'visibility_off' : 'visibility'}</span>
-          {isPreviewOpen ? 'Ocultar vista previa' : 'Ver cómo se verá'}
-        </button>
-      )}
-      <div className={`${forms.reveal} ${canPreview && isPreviewOpen ? forms.revealVisible : ''}`}>
-        <div className={forms.revealInner}>
-          <ProductPreview input={input} />
         </div>
       </div>
     </>

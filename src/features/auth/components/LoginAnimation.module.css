@@ -1,0 +1,40 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  margin-top: var(--space-lg);
+  text-align: center;
+}
+
+/* Temporary dashed box where the Lottie animation will go */
+.placeholder {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--c-border);
+  background: var(--c-fresa-soft);
+}
+
+.placeholderLabel {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--c-cocoa);
+}
+
+.placeholderName {
+  font-size: var(--font-size-xs);
+  color: var(--c-text-muted);
+}
+
+/* Neutral, never red — the animation carries the message */
+.caption {
+  max-width: 280px;
+  font-size: var(--font-size-md);
+  color: var(--c-text-muted);
+}

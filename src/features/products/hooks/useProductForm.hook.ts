@@ -28,14 +28,15 @@ export function useProductForm(product: Product | null, categoryIds: string[], o
   const [input, setInput] = useState<ProductInput>(initial);
   const [priceDigits, setPriceDigits] = useState(amountToCentsDigits(initial.price));
   const [touched, setTouched] = useState<Set<keyof ProductInput>>(new Set());
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
 
   const fullInput: ProductInput = { ...input, price: centsDigitsToAmount(priceDigits) };
   const problems = getProductProblems(fullInput, categoryIds);
   const isComplete = Object.keys(problems).length === 0;
-  const canPreview = input.mediaUrl.trim() !== '' && getMediaUrlProblem(input.mediaUrl.trim()) === '';
+  const hasUsableMedia = input.mediaUrl.trim() !== '' && getMediaUrlProblem(input.mediaUrl.trim()) === '';
+  /** Live preview: only a usable link reaches the card (half-typed links show the placeholder). */
+  const previewInput: ProductInput = hasUsableMedia ? fullInput : { ...fullInput, mediaUrl: '', posterUrl: '' };
 
   const update = <TKey extends keyof ProductInput>(key: TKey, value: ProductInput[TKey]) => {
     setSaveError('');
@@ -73,9 +74,7 @@ export function useProductForm(product: Product | null, categoryIds: string[], o
     touch,
     errorFor,
     isComplete,
-    canPreview,
-    isPreviewOpen,
-    togglePreview: () => setIsPreviewOpen((open) => !open),
+    previewInput,
     isSaving,
     saveError,
     save,
