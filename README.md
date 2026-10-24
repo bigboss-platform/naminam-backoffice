@@ -6,6 +6,11 @@
 > (`naminam-menu`, rama `santanita`) **todavía no lee esta base**: usa datos estáticos (MVP).
 > Pendiente para conectarlos: variantes, estado de stock (en stock / por encargo / agotado) y
 > "temporada" en el modelo de productos.
+>
+> **Modo demo (sin base de datos):** si no hay `MONGODB_URI` (o `DEMO_MODE=true`) el panel usa
+> los datos de `scripts/seed-data.json` en memoria y la cuenta demo `demo@santanita.pe` /
+> `santanita2026` (se muestra en /login). Los cambios se pierden al reiniciar. Así corre la demo
+> pública en Vercel: https://admin-antojitos-santanita.vercel.app
 
 Admin panel for the Ñami Ñam public site: desserts, categories, contact, location, opening
 hours and cover photo. Next.js 16 + MongoDB (server-side only).
